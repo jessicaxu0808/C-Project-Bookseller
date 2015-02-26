@@ -5,6 +5,10 @@
 #include <string>
 #include <cstdlib>
 
+
+const int CENTER = 20;
+const string INDENT = "     ";
+
 using namespace std;
 const int CENTER = 20;
 const int INDENT = 5;
@@ -37,13 +41,7 @@ void clearScreen(){
 }
 int mainMenu(){
     int choice;
-    for (int i = 0; i < (CENTER - 7); i++){
-        cout << " ";
-    }
-    cout << "P.A.J.L. BOOKS" << endl;
-    for (int i = 0; i < (CENTER - 5); i++){
-        cout << " ";
-    }
+    cout << setw(CENTER +7) << "P.A.J.L. BOOKS" << endl;
     cout << "Main Menu" << endl << endl;
     for (int i = 0; i < INDENT; i++){
         cout << " ";
