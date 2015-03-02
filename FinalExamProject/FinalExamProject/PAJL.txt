@@ -1,0 +1,32 @@
+123
+Starting out with C++
+Tony Gaddis
+Perason
+01 01 2010
+3
+123.50
+220.85
+1234
+Off the Record
+K.A.Linde
+MontLake
+02 21 2014
+1
+12.15
+20.90
+12345
+Alice in Wonderland
+Lewis Carroll
+Some Publisher
+05 07 1997
+85
+15
+10
+67890
+The Strange Case of Dr. Jekyll and Mr. Hyde
+Robert Louis Stevenson
+Another Publisher
+01 01 2000
+200
+20
+18
