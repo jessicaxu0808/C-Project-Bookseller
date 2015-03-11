@@ -11,7 +11,7 @@
 using namespace std;
 
 const int CENTER = 20;
-const int INDENT = 5;
+const string INDENT = "     ";
 void clearScreen();
 int mainMenu();
 void cashierModule();
@@ -46,34 +46,13 @@ void clearScreen(){
 }
 int mainMenu(){
 	int choice;
-	for (int i = 0; i < (CENTER - 7); i++){
-		cout << " ";
-	}
-	cout << "P.A.J.L. BOOKS" << endl;
-	for (int i = 0; i < (CENTER - 5); i++){
-		cout << " ";
-	}
-	cout << "Main Menu" << endl << endl;
-	for (int i = 0; i < INDENT; i++){
-		cout << " ";
-	}
-	cout << "1: Cashier Module" << endl;
-	for (int i = 0; i < INDENT; i++){
-		cout << " ";
-	}
-	cout << "2: Inventory Database Module" << endl;
-	for (int i = 0; i < INDENT; i++){
-		cout << " ";
-	}
-	cout << "3: Report Module" << endl;
-	for (int i = 0; i < INDENT; i++){
-		cout << " ";
-	}
-	cout << "4: Exit" << endl << endl;
-	for (int i = 0; i < INDENT; i++){
-		cout << " ";
-	}
-	cout << "Select Option: ";
+	cout << setw(CENTER + 9) << "P.A.J.L. BOOKS" << endl;
+	cout << setw(CENTER + 6) << "Main Menu" << endl << endl;
+	cout << INDENT << "1: Cashier Module" << endl;
+	cout << INDENT << "2: Inventory Database Module" << endl;
+	cout << INDENT << "3: Report Module" << endl;
+	cout << INDENT << "4: Exit" << endl << endl;
+	cout << INDENT << "Select Option: ";
 	cin >> choice;			//USER INPUT TO SELECT CHOICE, SAVES INPUT TO INT VARIABLE 'CHOICE'
 	cin.clear();
 	cin.ignore(1000, '\n');
@@ -89,94 +68,50 @@ int mainMenu(){
 	clearScreen();
 	return choice;
 }
+
 void cashierModule(){
-	string book;
-	double price;
-	double subTotal = 0;
-	double total = 0;
-	bool gMainMenu = false;
-	bool checkout = false;
+	int option = 0;
+	BookList bookList{ "PAJL.txt" };
+	bookList.readFromFile();
+	CashierModule cashierModule{ &bookList };
+	while (option != 3){
+		cout << setw(CENTER + 9) << "P.A.J.L. BOOKS" << endl;
+		cout << setw(CENTER + 5) << "Cashier" << endl << endl;
+		cout << INDENT << "1: Check out by ISBN" << endl;
+		cout << INDENT << "2: Check out by Title" << endl;
+		cout << INDENT << "3: Return to Main Menu" << endl << endl;
+		cout << INDENT << "Please input your selection:" << endl;
+		cout << endl;
 
-	for (int i = 0; i < (CENTER - 7); i++){
-		cout << " ";
-	}
-	cout << "P.A.J.L. BOOKS" << endl;
-	for (int i = 0; i < (CENTER - 5); i++){
-		cout << " ";
-	}
-	cout << "Cashier" << endl << endl;
-	for (int i = 0; i < INDENT; i++){
-		cout << " ";
-	}
-	cout << "Type Exit to go to Main Menu" << endl;
-	for (int i = 0; i < INDENT; i++){
-		cout << " ";
-	}
-	cout << "Type Checkout to Checkout" << endl << endl;
-	for (int i = 0; i < INDENT; i++){
-		cout << " ";
-	}
+		cin >> option;
+		cin.clear();
+		cin.ignore(1000, '\n');
 
-	cout << endl;
-
-	while (gMainMenu == false){
-		while (checkout == false){
-			cout << "Book Name: ";
-			cin >> book;			//USER INPUT TO SELECT CHOICE, SAVES INPUT TO STRING VARIABLE 'BOOK'
+		while (option != 1 && option != 2 && option != 3){		//CHECKS FOR INVALID USER INPUT
+			cout << INDENT << "Please re-enter your selection: ";
+			cin >> option;
 			cin.clear();
 			cin.ignore(1000, '\n');
-
-			if (book == "checkout"){
-				checkout = true;
-				break;
-			}
-
-			if (book == "exit"){
-				gMainMenu = true;
-				break;
-			}
-
-			/*
-			while (book != inventoryBook){		//CHECKS FOR INVALID USER INPUT
-			for (int i = 0; i < INDENT; i++){
-			cout << " ";
-			}
-			cout << "Please re-enter your selection: ";
-			cin >> choice;
-			cin.clear();
-			cin.ignore(1000, '\n');
-			}
-			*/
-
-			price = 8.25; //temp price till inventory is created for books
-			subTotal = subTotal + price;
-			total = (subTotal * 2);
 		}
 
-		if (gMainMenu == true)
+		switch (option){
+		case 1: option = 0;
+			clearScreen();
+			cashierModule.isbnCheckOut();
 			break;
-
-		else
-		{
-			cout << "Sub-Total: " << subTotal << endl;
-			for (int i = 0; i < INDENT; i++){
-				cout << " ";
-			}
-			cout << "Total: " << subTotal << endl << endl;
-			for (int i = 0; i < INDENT - 20; i++){
-				cout << " ";
-			}
-			cout << "Thank you for shopping at  P.A.J.L. BOOKS" << endl << endl;
-			for (int i = 0; i < INDENT; i++){
-				cout << " ";
-			}
+		case 2: option = 0;
+			clearScreen();
+			cashierModule.titleCheckOut();
+			break;
+		case 3:
+			break;
 		}
-
-		system("pause");
-
-		clearScreen();
-		cashierModule();
 	}
+
+	option = 0;
+	clearScreen();
+	mainMenu();
+}
 
 	clearScreen();
 	gMainMenu = false;
@@ -190,37 +125,13 @@ void inventoryDatabaseModule(){
 	BookList bookList{ "PAJL.txt" };
 	bookList.readFromFile();
 	InventoryDatabaseModule invModule{ &bookList };
-	for (int i = 0; i < (CENTER - 7); i++){
-		cout << " ";
-	}
-	cout << "P.A.J.L. BOOKS" << endl;
-	for (int i = 0; i < (CENTER - 5); i++){
-		cout << " ";
-	}
-	cout << "Inventory Database" << endl << endl;
-	for (int i = 0; i < INDENT; i++){
-		cout << " ";
-	}
-	cout << "1. Look Up a Book" << endl;
-	for (int i = 0; i < INDENT; i++){
-		cout << " ";
-	}
-	cout << "2. Add a Book" << endl;
-	for (int i = 0; i < INDENT; i++){
-		cout << " ";
-	}
-	cout << "3. Edit a Book's Record" << endl;
-	for (int i = 0; i < INDENT; i++){
-		cout << " ";
-	}
-	cout << "4. Delete a Book" << endl;
-	for (int i = 0; i < INDENT; i++){
-		cout << " ";
-	}
-	cout << "5. Return To Main Menu" << endl;
-	for (int i = 0; i < INDENT; i++){
-		cout << " ";
-	}
+	cout << setw(CENTER + 9) << "P.A.J.L. BOOKS" << endl;
+	cout << setw(CENTER + 11) << "Inventory Database" << endl << endl;
+	cout << INDENT << "1: Look Up a Book" << endl;
+	cout << INDENT << "2: Add a Book" << endl;
+	cout << INDENT << "3: Edit a Book's Record" << endl;
+	cout << INDENT << "4: Delete a Book" << endl;
+	cout << INDENT << "5: Return To Main Menu" << endl;
 	cout << endl;
 	cin >> option;			//USER INPUT TO SELECT CHOICE, SAVES INPUT TO INT VARIABLE 'CHOICE'
 	cin.clear();
@@ -267,46 +178,16 @@ void reportModule(){
 	ReportModule repModule{ &bookList };
 
 	int choiceReport = 0;
-	for (int i = 0; i < (CENTER - 7); i++){
-		cout << " ";
-	}
-	cout << "P.A.J.L. BOOKS" << endl;
-	for (int i = 0; i < (CENTER - 5); i++){
-		cout << " ";
-	}
-	cout << "Reports" << endl << endl;
-	for (int i = 0; i < INDENT; i++){
-		cout << " ";
-	}
-	cout << "1. Inventory Listing" << endl;
-	for (int i = 0; i < INDENT; i++){
-		cout << " ";
-	}
-	cout << "2. Inventory Wholesale Value" << endl;
-	for (int i = 0; i < INDENT; i++){
-		cout << " ";
-	}
-	cout << "3. Inventory Retail Value" << endl;
-	for (int i = 0; i < INDENT; i++){
-		cout << " ";
-	}
-	cout << "4. Listing by Quantity" << endl;
-	for (int i = 0; i < INDENT; i++){
-		cout << " ";
-	}
-	cout << "5. Listing by Cost" << endl;
-	for (int i = 0; i < INDENT; i++){
-		cout << " ";
-	}
-	cout << "6. Listing by Age" << endl;
-	for (int i = 0; i < INDENT; i++){
-		cout << " ";
-	}
-	cout << "7. Return to Main Menu" << endl << endl;
-	for (int i = 0; i < (INDENT - 1); i++){
-		cout << " ";
-	}
-	cout << "Enter Your Choice: ";
+	cout << setw(CENTER + 9) << "P.A.J.L. BOOKS" << endl;
+	cout << setw(CENTER + 3) << "Reports" << endl << endl;
+	cout << INDENT << "1. Inventory Listing" << endl;
+	cout << INDENT << "2. Inventory Wholesale Value" << endl;
+	cout << INDENT << "3. Inventory Retail Value" << endl;
+	cout << INDENT << "4. Listing by Quantity" << endl;
+	cout << INDENT << "5. Listing by Cost" << endl;
+	cout << INDNET << "6. Listing by Age" << endl;
+	cout << INDENT << "7. Return to Main Menu" << endl << endl;
+	cout << INDENT << "Enter Your Choice: ";
 	cin >> choiceReport;
 
 	switch (choiceReport)
