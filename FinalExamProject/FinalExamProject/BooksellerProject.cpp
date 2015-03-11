@@ -4,8 +4,9 @@
 #include <fstream>
 #include <string>
 #include <cstdlib>
-#include "InventoryModule.h"
+#include "InventoryDatabaseModule.h"
 #include "ReportModule.h"
+#include "CashierModule.h"
 #include "BookList.h"
 
 using namespace std;
@@ -38,12 +39,15 @@ int main(){
 		}
 
 	}
+
 	system("pause");
 	return 0;
 }
+
 void clearScreen(){
 	if (system("CLS")) system("clear");		//CALLS CLEARSCREEN FUNCTION TO CLEAR THE MAIN MENU AWAY;;
 }
+
 int mainMenu(){
 	int choice;
 	cout << setw(CENTER + 9) << "P.A.J.L. BOOKS" << endl;
@@ -57,10 +61,7 @@ int mainMenu(){
 	cin.clear();
 	cin.ignore(1000, '\n');
 	while (choice != 1 && choice != 2 && choice != 3 && choice != 4){		//CHECKS FOR INVALID USER INPUT
-		for (int i = 0; i < INDENT; i++){
-			cout << " ";
-		}
-		cout << "Please re-enter your selection: ";
+		cout << INDENT << "Please re-enter your selection: ";
 		cin >> choice;
 		cin.clear();
 		cin.ignore(1000, '\n');
@@ -68,7 +69,6 @@ int mainMenu(){
 	clearScreen();
 	return choice;
 }
-
 void cashierModule(){
 	int option = 0;
 	BookList bookList{ "PAJL.txt" };
@@ -113,12 +113,6 @@ void cashierModule(){
 	mainMenu();
 }
 
-	clearScreen();
-	gMainMenu = false;
-	checkout = false;
-	mainMenu();
-}
-
 void inventoryDatabaseModule(){
 	int option = 0;
 	bool user_option = false;
@@ -137,10 +131,7 @@ void inventoryDatabaseModule(){
 	cin.clear();
 	cin.ignore(1000, '\n');
 	while (option != 1 && option != 2 && option != 3 && option != 4 && option != 5){		//CHECKS FOR INVALID USER INPUT
-		for (int i = 0; i < INDENT; i++){
-			cout << " ";
-		}
-		cout << "Please re-enter your selection: ";
+		cout << INDENT << "Please re-enter your selection: ";
 		cin >> option;
 		cin.clear();
 		cin.ignore(1000, '\n');
@@ -169,6 +160,7 @@ void inventoryDatabaseModule(){
 	}
 	clearScreen();
 }
+
 void reportModule(){
 	//cout << "WORKING 3" << endl;
 	int option = 0;
@@ -185,34 +177,34 @@ void reportModule(){
 	cout << INDENT << "3. Inventory Retail Value" << endl;
 	cout << INDENT << "4. Listing by Quantity" << endl;
 	cout << INDENT << "5. Listing by Cost" << endl;
-	cout << INDNET << "6. Listing by Age" << endl;
+	cout << INDENT << "6. Listing by Age" << endl;
 	cout << INDENT << "7. Return to Main Menu" << endl << endl;
 	cout << INDENT << "Enter Your Choice: ";
 	cin >> choiceReport;
 
 	switch (choiceReport)
 	{
-	case 1: 
+	case 1:
 		cout << repModule.displayInventory();
 		//repListing()
 		break;
-	case 2: 
+	case 2:
 		cout << repModule.displayWholeSaleValue();
 		//repWholesale()
 		break;
-	case 3: 
+	case 3:
 		cout << repModule.displayByRetailValue();
 		//repRetail()
 		break;
-	case 4: 
+	case 4:
 		cout << repModule.listByQuantity();
 		//repQty()
 		break;
-	case 5: 
+	case 5:
 		cout << repModule.listByCost();
 		//repCost()
 		break;
-	case 6: 
+	case 6:
 		cout << repModule.listByDate();
 		//repAge()
 		break;
