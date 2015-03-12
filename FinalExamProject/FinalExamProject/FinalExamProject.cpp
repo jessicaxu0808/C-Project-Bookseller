@@ -159,7 +159,92 @@ void inventoryDatabaseModule(){
 	clearScreen();
 }
 void reportModule(){
-	cout << "WORKING 3" << endl;
-	system("pause");
-	clearScreen();
+//cout << "WORKING 3" << endl;
+int option = 0;
+bool user_option = false;
+BookList bookList{ "PAJL.txt" };
+bookList.readFromFile();
+ReportModule repModule{ &bookList };
+int choiceReport = 0;
+for (int i = 0; i < (CENTER - 7); i++){
+cout << " ";
+}
+cout << "P.A.J.L. BOOKS" << endl;
+for (int i = 0; i < (CENTER - 5); i++){
+cout << " ";
+}
+cout << "Reports" << endl << endl;
+for (int i = 0; i < INDENT; i++){
+cout << " ";
+}
+cout << "1. Inventory Listing" << endl;
+for (int i = 0; i < INDENT; i++){
+cout << " ";
+}
+cout << "2. Inventory Wholesale Value" << endl;
+for (int i = 0; i < INDENT; i++){
+cout << " ";
+}
+cout << "3. Inventory Retail Value" << endl;
+for (int i = 0; i < INDENT; i++){
+cout << " ";
+}
+cout << "4. Listing by Quantity" << endl;
+for (int i = 0; i < INDENT; i++){
+cout << " ";
+}
+cout << "5. Listing by Cost" << endl;
+for (int i = 0; i < INDENT; i++){
+cout << " ";
+}
+cout << "6. Listing by Age" << endl;
+for (int i = 0; i < INDENT; i++){
+cout << " ";
+}
+cout << "7. Return to Main Menu" << endl << endl;
+for (int i = 0; i < (INDENT - 1); i++){
+cout << " ";
+}
+cout << "Enter Your Choice: ";
+cin >> choiceReport;
+switch (choiceReport)
+{
+case 1:
+cout << repModule.displayInventory();
+//repListing()
+break;
+case 2:
+cout << repModule.displayWholeSaleValue();
+//repWholesale()
+break;
+case 3:
+cout << repModule.displayByRetailValue();
+//repRetail()
+break;
+case 4:
+cout << repModule.listByQuantity();
+//repQty()
+break;
+case 5:
+cout << repModule.listByCost();
+//repCost()
+break;
+case 6:
+cout << repModule.listByDate();
+//repAge()
+break;
+case 7: //exit to main menu
+//clearScreen();
+user_option = true;
+break;
+default: "Please enter a valid choice: 1,2,3,4,5,6 or 7.";
+break;
+}
+if (user_option == true)
+{
+clearScreen();
+mainMenu();
+}
+system("pause");
+clearScreen();
 }
