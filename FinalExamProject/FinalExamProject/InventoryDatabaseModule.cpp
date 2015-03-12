@@ -1,3 +1,44 @@
+//CIS 22B
+/*Serendipity BookSeller Program.
+Team: Aaron, Jessica, Lakshmi, Pooja.
+Author: Pooja Prabhuswamy
+Date: 03/19/2015
+Description:Serendipity Booksellers is a small bookstore located in a shopping mall. They have a
+cashier station equipped with a personal computer. The manager wants you to develop a
+point-of-sale (POS) software package that will make the computer function as a cash
+register and keep an inventory file. The inventory file will be a database of all the books
+in the bookstore. In general, the software is to perform the following tasks:
+
+• Calculate the total of a sale, including sales tax
+• When a book is purchased, subtract it from the inventory file
+• Add, change, delete, and look up books in the inventory file
+• Display various sales reports
+
+Psuedocode:
+1. InventoryDatabaseModule takes BookList pointer b which inherits from StoreModule.
+2. lookUpBook function asks the users to search book by ISBN or book title or to exit. It checks if the user has given the proper input
+	if not it asks again.
+3. For case 1: int variable info is set to Book:ISB. The user is asked to type the ISBN number. The ISBN number is read using readString function,
+4. For case 2: int variable info is set to Book:BKTITLE. The user is asked to type the book title. The book title is read using 
+	readString function.
+5. For case 3: The program exits and variable exit is set to true.
+6. tempV is initialized as vector of type Book.
+7. bookList partialBooks function is called which takes in infor, findS and tempV as arguments.
+8. If tempV.size() is returned as 1 then the book being searched is found. It prints all the details of the book.
+9. If tempV.size is returned as greater than 1, it prints more than 1 book is found and prints out the ISBN and title of these books to be chosen 
+	by the user. Once the user chooses which book user wants the book details are printed on the screen.
+10. editBook function asks the user to enter unique ISBN number. If the book with that particular ISBN number exists then the user is asked to
+	What to edit. The user can enter the details which he wants to edit. once the user enters the value the values are set using the relevant set
+	functions. The values are changed in bookList vector. If book is not found it prints book not found on the screen.
+11. deleteBook function asks the user for the ISBN number or book title which they want to delete. Using the partialFindBooks function we search
+	if the book exists in the tempV vector of Book type. If the size of vector tempV is 1 then the user is told that the book is found and
+	deleted. If the size of vector tempV is greater than 1 then all the books with that particular ISBN number or title is printed out so
+	that the user can choose which book to delete and that book is printed as deleted.
+12. addBook function creates a book of type Book and tempV vector of type Book. The user is asked to enter the ISBN number. If the ISBN number
+	already exits then the user is asked to enter a unique ISBN number. The user is then asked to enter book title, author, publisher, quantity, 
+	date added, wholesale cost and retail cost. It prints that the book is added.
+*/
+
 #define _CRT_SECURE_NO_WARNINGS
 #include "InventoryDatabaseModule.h"
 
@@ -282,6 +323,66 @@ void InventoryDatabaseModule::deleteBook()
 	clearScrn();
 	break;
 	}
+}
+
+void InventoryDatabaseModule::addBook()
+{
+	Book book;
+	string addStr;
+	int addInt;
+	double addDouble;
+	vector<Book*> tempV;
+
+	cout << "Enter in the ISBN: ";
+	do{
+		readString(addStr);
+		bookList->findBooks(Book::ISB, addStr, tempV);
+		if (tempV.size() > 0){
+			cout << "Error, ISBN allready exists" << endl;
+			cout << "Please enter a unique ISBN: ";
+		}
+	} while (tempV.size() > 0);
+	book.setISBN(addStr);
+	cout << "Enter in the Title: "; readString(addStr); book.setBookTitle(addStr);
+	cout << "Enter in the Author: "; readString(addStr); book.setAuthorName(addStr);
+	cout << "Enter in the Publisher: "; readString(addStr); book.setPublisher(addStr);
+	cout << "Entering in the Date Added(just type in integers)... " << endl;
+
+	cout << "Enter the Month: ";
+	while (!readInt(addInt) || addInt < 1 || addInt > 12)                   //Error checking, just making sure they dont enter in words or decimals
+		cout << "Enter in a integer between 1 and 12: ";
+	book.setMonth(addInt);
+
+	cout << "Enter the Day: ";
+	while (!readInt(addInt) || addInt < 1 || addInt > 30)					//Error checking
+		cout << "Enter in a integer between 1 and 30: ";
+	book.setDay(addInt);
+
+	cout << "Enter the Year: ";
+	while (!readInt(addInt) || addInt < 0)					//Error checking
+		cout << "Enter in a positive integer: ";
+	book.setYear(addInt);
+
+	cout << "Enter in the Quantity-On-Hand: ";
+	while (!readInt(addInt) || addInt < 0)					//Error checking
+		cout << "Enter in an positive integer or 0: ";
+	book.setQuantity(addInt);
+
+	cout << "Enter in the Wholesale Cost: ";
+	while (!readDouble(addDouble) || addDouble < 0)					//Error checking
+		cout << "Enter in an positive decimal: ";
+	book.setWholesaleCost(addDouble);
+
+	cout << "Enter in the Retail Price: ";
+	while (!readDouble(addDouble) || addDouble < 0)					//Error checking
+		cout << "Enter in an positive decimal: ";
+	book.setRetailCost(addDouble);
+
+	cout << endl << "Displaying the Books Information..." << endl;
+	cout << book.toString(Book::EVERYTHING) << endl;
+	bookList->add(book);
+
+	system("pause");
 }
 
 void clearScrn(){

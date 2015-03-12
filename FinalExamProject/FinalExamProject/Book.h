@@ -1,3 +1,28 @@
+//CIS 22B
+/*Serendipity BookSeller Program.
+Team: Aaron, Jessica, Lakshmi, Pooja.
+Author: Pooja Prabhuswamy
+Date: 03/19/2015
+Description:Serendipity Booksellers is a small bookstore located in a shopping mall. They have a
+cashier station equipped with a personal computer. The manager wants you to develop a
+point-of-sale (POS) software package that will make the computer function as a cash
+register and keep an inventory file. The inventory file will be a database of all the books
+in the bookstore. In general, the software is to perform the following tasks:
+ 
+• Calculate the total of a sale, including sales tax
+• When a book is purchased, subtract it from the inventory file
+• Add, change, delete, and look up books in the inventory file 
+• Display various sales reports 
+
+Psuedocode:
+1. Class Book is declared.
+2. It has private members: ISBN, bookTitle, authorName, publisher, date, quantity, wholesaleCost, retailCost and bool function.
+3. It has public members: Book constructors, setISBN, setBookTitle, setAuthorName, setPublisher, setQuantity, setWholesaleCost, setRetailCost,
+	setDay, setMonth, setYear, getISBN, getBookTitle, getAuthorName, getPublisher, getQuantity, getWholesaleCost, getRetailCost,
+	getDay, getMonth, getYear, getProperty, operator >> overloaded function, operator << overloaded function.
+4. The values of ISB, BKTTLE = 2, AUTHNAME = 4,	PUB = 8, DATE = 16,	QUANT = 32,	WCOST = 64, RET = 128,
+	EVERYTHING = 255 are set as constant static int.
+*/
 #ifndef BOOKARRAY_H
 #define BOOKARRAY_H
 
@@ -37,6 +62,7 @@ public:
 	Book();
 
 	string toString(int);
+	string upperCase(string);
 
 
 
