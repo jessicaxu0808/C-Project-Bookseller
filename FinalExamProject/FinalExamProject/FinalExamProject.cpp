@@ -139,7 +139,7 @@ void inventoryDatabaseModule(){
 		invModule.lookUpBook();
 		break;
 	case 2:
-		cout << "Still working on it" << endl;
+		invModule.addBook();
 		break;
 	case 3:
 		invModule.editBook();
