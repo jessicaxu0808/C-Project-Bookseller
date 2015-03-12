@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include "InventoryDatabaseModule.h"
 #include "CashierModule.h"
+#include "ReportModule.h"
 
 using namespace std;
 
