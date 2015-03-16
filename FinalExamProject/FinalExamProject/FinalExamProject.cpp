@@ -212,30 +212,23 @@ switch (choiceReport)
 {
 case 1:
 cout << repModule.displayInventory();
-//repListing()
 break;
 case 2:
 cout << repModule.displayWholeSaleValue();
-//repWholesale()
 break;
 case 3:
 cout << repModule.displayByRetailValue();
-//repRetail()
 break;
 case 4:
 cout << repModule.listByQuantity();
-//repQty()
 break;
 case 5:
 cout << repModule.listByCost();
-//repCost()
 break;
 case 6:
 cout << repModule.listByDate();
-//repAge()
 break;
 case 7: //exit to main menu
-//clearScreen();
 user_option = true;
 break;
 default: "Please enter a valid choice: 1,2,3,4,5,6 or 7.";
