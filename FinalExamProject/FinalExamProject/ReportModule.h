@@ -1,4 +1,5 @@
 /*CIS 22B
+/*CIS 22B
 Serendipity BookSeller Program.
 Team: Aaron, Jessica, Lakshmi, Pooja.
 Author: Pooja Prabhuswamy
@@ -22,8 +23,9 @@ dRVal = 3,
 lQT = 4,
 lWSVAL = 5,
 lDT = 6;
+3. sort() function
 
-3. It has public members : 
+4. It has public members : 
 ReportModule overloaded constructor
 act() function of type void
 displayInventory() function of type string
