@@ -1,62 +1,58 @@
-#include "ReportModule.h"
-#include <vector>
-#include <iostream>
-#include "Book.h"
+//CIS 22B
+/*Serendipity BookSeller Program.
+Team: Aaron, Jessica, Lakshmi, Pooja.
+Author: Pooja Prabhuswamy
+Date: 03/19/2015
+Description:Serendipity Booksellers is a small bookstore located in a shopping mall. They have a
+cashier station equipped with a personal computer. The manager wants you to develop a
+point-of-sale (POS) software package that will make the computer function as a cash
+register and keep an inventory file. The inventory file will be a database of all the books
+in the bookstore. In general, the software is to perform the following tasks:
+• Calculate the total of a sale, including sales tax
+• When a book is purchased, subtract it from the inventory file
+• Add, change, delete, and look up books in the inventory file
+• Display various sales reports
 
+*********************************PSUEDO CODE***************************************
+The functions implemented are -
 
-
-ReportModule::ReportModule(BookList*b) : StoreModule(b)
-{
-}
-
-
-/*Psuedo Code
-- ask the user to choose one of the below:
-- Display the inventory
-- display and tally the Wholesale valaue
-- display and tally the retail value
-- list by quantity
-- list by cost
-- list by age
-- or return to the main menu
-the selection sort algorithim
+1. Display inventory
+displayInventory() -
+This function displays list of information on all the books.
+2. Display and tally the wholesale value
+displayWholeSaleValue()
+This function displays list of the wholesale value of all the books in the inventory and the total wholesale value
+of the inventory.
+3. Display and tally the retail value 
+displayByRetailValue()
+This function displays a list of the retail value of all books in the inventory and the total retail value of the 
+inventory.
+4. List by quantity
+listByQuantity()
+This function displays a list of all books in the inventory sorted by quantity on hand. The books with the 
+greatest quantity on hand will be listed first.
+5. List by cost
+listByCost()
+This function displays a list of all books in the inventory, sorted by wholesale cost. The
+books with the greatest wholesale cost will be listed first.
+6. List by age
+listByDate()
+A list of all books in the inventory, sorted by purchase date. The books that have been in the inventory 
+longest will be listed first.
+7. The sort() function uses the selection sort algorithm.
 - locate the i-th smallest element in the AccountInfo array
 - move the i-th smallest element to the i-th position, and move the element which was previously at the i-th index into the now vacant indice
 - call the recursive function again
 - base case: if the int i is == size-1, then return out of method
 */
-void ReportModule::act()
-{
-	bookList->readFromFile();
-	char cInput;
-	cout << "|         Report Module          |\n";
-	cout << "|                                |\n";
-	cout << "|  1. Inventory Listing          |\n";
-	cout << "|  2. Inventory Wholesale Value  |\n";
-	cout << "|  3. Inventory Retail Value     |\n";
-	cout << "|  4. Listing by Quantity        |\n";
-	cout << "|  5. Listing by Cost            |\n";
-	cout << "|  6. Listing by Age             |\n";
-	cout << "|  7. Return to the Main Menu    |\n";
-	cout << "|                                |\n";
-	cout << "|  Enter Your Choice: ";
 
-	while (!readChar(cInput) || ((cInput < '1') || (cInput > '7'))) {
-		cout << "\nPlease enter a number between 1 and 7: ";
-	}
-	if (cInput == '1')
-		cout << displayInventory();
-	else if (cInput == '2')
-		cout << displayWholeSaleValue();
-	else if (cInput == '3')
-		cout << displayByRetailValue();
-	else if (cInput == '4')
-		cout << listByQuantity();
-	else if (cInput == '5')
-		cout << listByCost();
-	else if (cInput == '6')
-		cout << listByDate();
-	//else answer == 7, then just let the method end
+#include "ReportModule.h"
+#include <vector>
+#include <iostream>
+#include "Book.h"
+
+ReportModule::ReportModule(BookList*b) : StoreModule(b)
+{
 }
 
 string ReportModule::displayInventory()
@@ -121,3 +117,4 @@ void ReportModule::sort(int st)
 		(*bookList)[i] = temp;
 	}
 }
+
