@@ -9,10 +9,10 @@ point-of-sale (POS) software package that will make the computer function as a c
 register and keep an inventory file. The inventory file will be a database of all the books
 in the bookstore. In general, the software is to perform the following tasks:
 
-• Calculate the total of a sale, including sales tax
-• When a book is purchased, subtract it from the inventory file
-• Add, change, delete, and look up books in the inventory file
-• Display various sales reports
+â€¢ Calculate the total of a sale, including sales tax
+â€¢ When a book is purchased, subtract it from the inventory file
+â€¢ Add, change, delete, and look up books in the inventory file
+â€¢ Display various sales reports
 
 Psuedocode:
 1. The BookList constructors are defined here. In first constructor the input it takes is string s which is set to filename.
@@ -120,6 +120,17 @@ void BookList::readFromFile()
 		in >> b;
 		bookList.push_back(b);
 	}
+	in.close();
+}
+
+bool BookList::openSuccess(string file)
+{
+	ifstream in;
+	in.open(file, ios::in);
+	if (in.fail())
+		return false;
+	else
+		return true;
 	in.close();
 }
 
