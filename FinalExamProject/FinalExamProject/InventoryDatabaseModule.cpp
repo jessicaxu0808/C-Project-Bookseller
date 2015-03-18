@@ -9,10 +9,10 @@ point-of-sale (POS) software package that will make the computer function as a c
 register and keep an inventory file. The inventory file will be a database of all the books
 in the bookstore. In general, the software is to perform the following tasks:
 
-• Calculate the total of a sale, including sales tax
-• When a book is purchased, subtract it from the inventory file
-• Add, change, delete, and look up books in the inventory file
-• Display various sales reports
+â€¢ Calculate the total of a sale, including sales tax
+â€¢ When a book is purchased, subtract it from the inventory file
+â€¢ Add, change, delete, and look up books in the inventory file
+â€¢ Display various sales reports
 
 Psuedocode:
 1. InventoryDatabaseModule takes BookList pointer b which inherits from StoreModule.
@@ -87,6 +87,7 @@ void InventoryDatabaseModule::lookUpBook()
 
 		if (exit == true)
 		{
+			clearScrn();
 			break;
 		}
 
