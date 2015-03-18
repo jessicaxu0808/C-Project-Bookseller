@@ -115,49 +115,67 @@ void cashierModule(){
 void inventoryDatabaseModule(){
 	int option = 0;
 	bool user_option = false;
+	string fileName;
+	fileName = "PAJL.txt";
 	BookList bookList{ "PAJL.txt" };
-	bookList.readFromFile();
-	InventoryDatabaseModule invModule{ &bookList };
-	cout << setw(CENTER + 9) << "P.A.J.L. BOOKS" << endl;
-	cout << setw(CENTER + 11) << "Inventory Database" << endl << endl;
-	cout << INDENT << "1: Look Up a Book" << endl;
-	cout << INDENT << "2: Add a Book" << endl;
-	cout << INDENT << "3: Edit a Book's Record" << endl;
-	cout << INDENT << "4: Delete a Book" << endl;
-	cout << INDENT << "5: Return To Main Menu" << endl;
-	cout << endl;
-	cin >> option;			//USER INPUT TO SELECT CHOICE, SAVES INPUT TO INT VARIABLE 'CHOICE'
-	cin.clear();
-	cin.ignore(1000, '\n');
-	while (option != 1 && option != 2 && option != 3 && option != 4 && option != 5){		//CHECKS FOR INVALID USER INPUT
-		cout << INDENT << "Please re-enter your selection: ";
-		cin >> option;
-		cin.clear();
-		cin.ignore(1000, '\n');
-	}
-	switch (option){
-	case 1:
-		invModule.lookUpBook();
-		break;
-	case 2:
-		invModule.addBook();
-		break;
-	case 3:
-		invModule.editBook();
-		break;
-	case 4:
-		invModule.deleteBook();
-		break;
-	case 5:
-		user_option = true;
-		break;
-	}
-	if (user_option == true)
+	try
 	{
-		clearScreen();
-		mainMenu();
+		if (!bookList.openSuccess(fileName))
+		{
+			string exceptionString = "ERROR: File does not exist. Please provide a file.";
+			throw exceptionString;
+		}
+		else
+		{
+			bookList.readFromFile();
+			InventoryDatabaseModule invModule{ &bookList };
+			cout << setw(CENTER + 9) << "P.A.J.L. BOOKS" << endl;
+			cout << setw(CENTER + 11) << "Inventory Database" << endl << endl;
+			cout << INDENT << "1: Look Up a Book" << endl;
+			cout << INDENT << "2: Add a Book" << endl;
+			cout << INDENT << "3: Edit a Book's Record" << endl;
+			cout << INDENT << "4: Delete a Book" << endl;
+			cout << INDENT << "5: Return To Main Menu" << endl;
+			cout << endl;
+			cin >> option;			//USER INPUT TO SELECT CHOICE, SAVES INPUT TO INT VARIABLE 'CHOICE'
+			cin.clear();
+			cin.ignore(1000, '\n');
+			while (option != 1 && option != 2 && option != 3 && option != 4 && option != 5){		//CHECKS FOR INVALID USER INPUT
+				cout << INDENT << "Please re-enter your selection: ";
+				cin >> option;
+				cin.clear();
+				cin.ignore(1000, '\n');
+			}
+			switch (option){
+			case 1:
+				invModule.lookUpBook();
+				break;
+			case 2:
+				invModule.addBook();
+				break;
+			case 3:
+				invModule.editBook();
+				break;
+			case 4:
+				invModule.deleteBook();
+				break;
+			case 5:
+				user_option = true;
+				break;
+			}
+			if (user_option == true)
+			{
+				clearScreen();
+				mainMenu();
+			}
+		}
 	}
-	clearScreen();
+	catch (string exceptionString)
+	{
+		cout << exceptionString << endl;
+		system("pause");
+		clearScreen();
+	}
 }
 void reportModule(){
 //cout << "WORKING 3" << endl;
