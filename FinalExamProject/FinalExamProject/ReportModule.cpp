@@ -46,6 +46,7 @@ longest will be listed first.
 - base case: if the int i is == size-1, then return out of method
 */
 
+#define _CRT_SECURE_NO_WARNINGS
 #include "ReportModule.h"
 #include <vector>
 #include <iostream>
