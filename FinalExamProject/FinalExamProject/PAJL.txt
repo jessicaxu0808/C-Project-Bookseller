@@ -4,24 +4,24 @@ Tony Gaddis
 Perason
 01 01 2010
 3
-123.50
 220.85
+123.50
 1234
 Off the Record
 K.A.Linde
 MontLake
 02 21 2014
 1
-12.15
 20.90
+12.15
 12345
 Alice in Wonderland
 Lewis Carroll
 Some Publisher
 05 07 1997
 85
-15
 10
+15
 67890
 The Strange Case of Dr. Jekyll and Mr. Hyde
 Robert Louis Stevenson
@@ -29,4 +29,36 @@ Another Publisher
 01 01 2000
 200
 20
-18
+21
+0316284947
+Delicious Foods
+James Hannaham
+Little Brown
+03 17 2009
+12
+18.99
+21.90
+0987527393
+A Reunion Of Ghosts
+Judith Claire Mitchell
+Harper
+03 17 2015
+98
+32.78
+34.33
+1937512258
+Binary Star
+Two Dollar Radio
+Harper
+01 13 2015
+25
+21.99
+22.65
+0374260508
+The Sellout
+Paul Beatty
+Farrar, Straus and Giroux
+03 03 2015
+40
+29.99
+32.19
