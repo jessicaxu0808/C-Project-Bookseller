@@ -116,6 +116,7 @@ void InventoryDatabaseModule::lookUpBook()
 			else
 				cout << "Sorry, no books were found with those credentials" << endl;
 		}
+		bookList->writeToFile();
 		system("pause");
 		clearScrn();
 		break;
@@ -246,6 +247,7 @@ void InventoryDatabaseModule::editBook()
 	{
 		cout << "Book was not found." << endl;
 	}
+	bookList->writeToFile();
 	system("pause");
 	clearScrn();
 }
@@ -320,6 +322,7 @@ void InventoryDatabaseModule::deleteBook()
 				cout << "Book Deleted Succesfully" << endl;
 			}
 		}
+	bookList->writeToFile();
 	system("pause");
 	clearScrn();
 	break;
