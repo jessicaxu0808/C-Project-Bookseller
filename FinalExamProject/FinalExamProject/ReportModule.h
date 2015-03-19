@@ -1,5 +1,4 @@
 /*CIS 22B
-/*CIS 22B
 Serendipity BookSeller Program.
 Team: Aaron, Jessica, Lakshmi, Pooja.
 Author: Pooja Prabhuswamy
@@ -20,9 +19,9 @@ in the bookstore. In general, the software is to perform the following tasks:
 const static int dInv = 1
 dWSVal = 2,
 dRVal = 3,
-lQT = 4,
-lWSVAL = 5,
-lDT = 6;
+listQT = 4,
+listWSVAL = 5,
+listDT = 6;
 3. sort() function
 
 4. It has public members : 
@@ -63,9 +62,9 @@ private:           // these variables choose how the elements in bookList are to
 	const static int dInv = 1,
 		dWSVal = 2,
 		dRVal = 3,
-		lQT = 4,
-		lWSVAL = 5,
-		lDT = 6;
+		listQT = 4,
+		listWSVAL = 5,
+		listDT = 6;
 
 	void sort(int st);		//sort method
 
