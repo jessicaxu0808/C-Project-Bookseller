@@ -49,7 +49,6 @@ class ReportModule : public StoreModule
 
 public:
 	ReportModule(BookList*);
-	void act();
 	string displayInventory();           
 	string displayWholeSaleValue();
 	string displayByRetailValue();
@@ -66,7 +65,7 @@ private:           // these variables choose how the elements in bookList are to
 		listWSVAL = 5,
 		listDT = 6;
 
-	void sort(int st);		//sort method
+	void sort(int sortType);		//sort method
 
 };
 
