@@ -91,7 +91,7 @@ string ReportModule::listByDate()
 }
 
 
-void ReportModule::sort(int st)
+void ReportModule::sort(int sortType)
 {
 	int i, j, first;
 	Book temp;
@@ -100,15 +100,15 @@ void ReportModule::sort(int st)
 		first = i;
 		for (j = i; j < numLength; j++) {
 
-			if (st == listQT){
+			if (sortType == listQT){
 				if ((*bookList)[j].getQuantity() < (*bookList)[first].getQuantity())
 					first = j;
 			}
-			else if (st == listWSVAL){
+			else if (sortType == listWSVAL){
 				if ((*bookList)[j].getWholesaleCost() <(*bookList)[first].getWholesaleCost())
 					first = j;
 			}
-			else if (st == listDT){
+			else if (sortType == listDT){
 				if ((*bookList)[j].getDate() < (*bookList)[first].getDate())
 					first = j;
 			}
