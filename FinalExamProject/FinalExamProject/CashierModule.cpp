@@ -78,28 +78,39 @@ void CashierModule::isbnCheckOut(){
 
 			if (bookName == "checkout" || bookName == "Checkout"){		//breaks loop if 'checkout' or 'Checkout' is inputted
 				checkout = true;
+				for (int i = 0; i < bookList->getSize(); i++){
+					bookList->partialFindBooks(2, titles[i], tempV);
+					if (tempV.size() == 1){ //searches for matches for the books and restores the deducted quantities when a match is found
+						tempV[0]->setQuantity(stock[i]);
+					}
+				}
 				bookList->writeToFile();	//updates inventory quantities to reflect bookList with edited quantities of each book
 				break;
 			}
 
 			if (bookName == "exit" || bookName == "Exit"){
+				subTotal = 0;
+				total = 0;
+				exit = true;
 				for (int i = 0; i < items; i++){		//loop resets bookList to the previous quantities of each book because checkout was cancelled
 					bookList->partialFindBooks(2, titles[i], tempV);
 					if (tempV.size() == 1){ //searches for matches for the books and restores the deducted quantities when a match is found
 						tempV[0]->setQuantity(tempV[0]->getQuantity() + 1);
 					}
 				}
-				exit = true;
+				items = 0;
 				break;
 			}
 
 			bookList->partialFindBooks(1, bookName, tempV); //Searches for a book and saves the book information from bookList to tempV
 			if (tempV.size() == 1){ //checks if only one match was found (tempV.size is the number of matches)
-				if (tempV[0]->getQuantity() > 0){ //checks if the book is in stock
-					tempV[0]->setQuantity(tempV[0]->getQuantity() - 1);	//Reduces stock by one
+				stock[items] = tempV[0]->getQuantity();
+				if (stock[items] > 0){ //checks if the book is in stock
+					stock[items]--;	//Reduces stock by one
 					titles[items] = tempV[0]->getBookTitle();	//stores titles for receipt
 					prices[items] = tempV[0]->getRetailCost();	//stores prices for receipt
 					subTotal += tempV[0]->getRetailCost();		//increments subtotal
+					tempV[0]->setQuantity(stock[items]);
 					items++;	//counter items increases by one
 					cout << endl << "$" << fixed << setprecision(2) << prices[items - 1] << "     " << titles[items - 1] << endl << endl; //Outputs book name and price for confirmation
 				}
@@ -117,12 +128,14 @@ void CashierModule::isbnCheckOut(){
 				while (!readInt(answ) || (answ < 1) || (answ >tempV.size())) { //checks if user selection is valid. If not, user must re-input selection
 					cout << "\nPlease enter a number between 1 and " << tempV.size() << ": ";
 				}
-				if (tempV[answ - 1]->getQuantity() > 0){ //checks if the book is in stock
-					tempV[answ - 1]->setQuantity(tempV[0]->getQuantity() - 1); //Reduces stock by one
-					titles[items] = tempV[answ - 1]->getBookTitle(); //stores titles for receipt
-					prices[items] = tempV[answ - 1]->getRetailCost(); //stores prices for receipt
-					subTotal += tempV[answ - 1]->getRetailCost(); //counter items increase by one
-					items++;
+				stock[items] = tempV[answ - 1]->getQuantity();
+				if (stock[items] > 0){ //checks if the book is in stock
+					stock[items]--;	//Reduces stock by one
+					titles[items] = tempV[answ - 1]->getBookTitle();	//stores titles for receipt
+					prices[items] = tempV[answ - 1]->getRetailCost();	//stores prices for receipt
+					subTotal += tempV[answ - 1]->getRetailCost();		//increments subtotal
+					tempV[answ - 1]->setQuantity(stock[items]);
+					items++;	//counter items increases by one
 					cout << endl << "$" << fixed << setprecision(2) << prices[items - 1] << "     " << titles[items - 1] << endl << endl;
 				}
 				else{
@@ -187,28 +200,39 @@ void CashierModule::titleCheckOut(){
 
 			if (bookName == "checkout" || bookName == "Checkout"){		//breaks loop if 'checkout' or 'Checkout' is inputted
 				checkout = true;
+				for (int i = 0; i < bookList->getSize(); i++){
+					bookList->partialFindBooks(2, titles[i], tempV);
+					if (tempV.size() == 1){ //searches for matches for the books and restores the deducted quantities when a match is found
+						tempV[0]->setQuantity(stock[i]);
+					}
+				}
 				bookList->writeToFile();	//updates inventory quantities to reflect bookList with edited quantities of each book
 				break;
 			}
 
 			if (bookName == "exit" || bookName == "Exit"){
+				subTotal = 0;
+				total = 0;
+				exit = true;
 				for (int i = 0; i < items; i++){		//loop resets bookList to the previous quantities of each book because checkout was cancelled
 					bookList->partialFindBooks(2, titles[i], tempV);
 					if (tempV.size() == 1){ //searches for matches for the books and restores the deducted quantities when a match is found
 						tempV[0]->setQuantity(tempV[0]->getQuantity() + 1);
 					}
 				}
-				exit = true;
+				items = 0;
 				break;
 			}
 
 			bookList->partialFindBooks(2, bookName, tempV); //Searches for a book and saves the book information from bookList to tempV
 			if (tempV.size() == 1){ //checks if only one match was found (tempV.size is the number of matches)
-				if (tempV[0]->getQuantity() > 0){ //checks if the book is in stock
-					tempV[0]->setQuantity(tempV[0]->getQuantity() - 1);	//Reduces stock by one
+				stock[items] = tempV[0]->getQuantity();
+				if (stock[items] > 0){ //checks if the book is in stock
+					stock[items]--;	//Reduces stock by one
 					titles[items] = tempV[0]->getBookTitle();	//stores titles for receipt
 					prices[items] = tempV[0]->getRetailCost();	//stores prices for receipt
 					subTotal += tempV[0]->getRetailCost();		//increments subtotal
+					tempV[0]->setQuantity(stock[items]);
 					items++;	//counter items increases by one
 					cout << endl << "$" << fixed << setprecision(2) << prices[items - 1] << "     " << titles[items - 1] << endl << endl; //Outputs book name and price for confirmation
 				}
@@ -226,12 +250,14 @@ void CashierModule::titleCheckOut(){
 				while (!readInt(answ) || (answ < 1) || (answ >tempV.size())) { //checks if user selection is valid. If not, user must re-input selection
 					cout << "\nPlease enter a number between 1 and " << tempV.size() << ": ";
 				}
-				if (tempV[answ - 1]->getQuantity() > 0){ //checks if the book is in stock
-					tempV[answ - 1]->setQuantity(tempV[0]->getQuantity() - 1); //Reduces stock by one
-					titles[items] = tempV[answ - 1]->getBookTitle(); //stores titles for receipt
-					prices[items] = tempV[answ - 1]->getRetailCost(); //stores prices for receipt
-					subTotal += tempV[answ - 1]->getRetailCost(); //counter items increase by one
-					items++;
+				stock[items] = tempV[answ - 1]->getQuantity();
+				if (stock[items] > 0){ //checks if the book is in stock
+					stock[items]--;	//Reduces stock by one
+					titles[items] = tempV[answ - 1]->getBookTitle();	//stores titles for receipt
+					prices[items] = tempV[answ - 1]->getRetailCost();	//stores prices for receipt
+					subTotal += tempV[answ - 1]->getRetailCost();		//increments subtotal
+					tempV[answ - 1]->setQuantity(stock[items]);
+					items++;	//counter items increases by one
 					cout << endl << "$" << fixed << setprecision(2) << prices[items - 1] << "     " << titles[items - 1] << endl << endl;
 				}
 				else{
