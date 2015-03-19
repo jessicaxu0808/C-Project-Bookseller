@@ -75,18 +75,18 @@ string ReportModule::displayByRetailValue()
 }
 string ReportModule::listByQuantity()
 {
-	sort(lQT);
+	sort(listQT);
 	return bookList->listBooks(Book::ISB | Book::BKTTLE | Book::AUTHNAME | Book::QUANT);
 
 }
 string ReportModule::listByCost()
 {
-	sort(lWSVAL);
+	sort(listWSVAL);
 	return bookList->listBooks(Book::ISB | Book::BKTTLE | Book::AUTHNAME | Book::WCOST);
 }
 string ReportModule::listByDate()
 {
-	sort(lDT);
+	sort(listDT);
 	return bookList->listBooks(Book::ISB | Book::BKTTLE | Book::AUTHNAME | Book::DATE);
 }
 
@@ -100,15 +100,15 @@ void ReportModule::sort(int st)
 		first = i;
 		for (j = i; j < numLength; j++) {
 
-			if (st == lQT){
+			if (st == listQT){
 				if ((*bookList)[j].getQuantity() < (*bookList)[first].getQuantity())
 					first = j;
 			}
-			else if (st == lWSVAL){
+			else if (st == listWSVAL){
 				if ((*bookList)[j].getWholesaleCost() <(*bookList)[first].getWholesaleCost())
 					first = j;
 			}
-			else if (st == lDT){
+			else if (st == listDT){
 				if ((*bookList)[j].getDate() < (*bookList)[first].getDate())
 					first = j;
 			}
@@ -118,4 +118,3 @@ void ReportModule::sort(int st)
 		(*bookList)[i] = temp;
 	}
 }
-
